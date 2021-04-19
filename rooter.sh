@@ -1,9 +1,15 @@
+OS=$(uname)
+
+if [ $OS == "Darwin" ]; then
+    mount_dir=/Volumes/rooter_build
+else
+    mount_dir=$(pwd)/build
+fi
+
 docker run -it --rm \
 	--name rooter \
-    -v $HOME/git:/root/host_git \
-	-v /Volumes/rooter_build:/root/git \
+	-v $mount_dir:/root/build \
 	-v $HOME/.ssh:/root/.ssh \
 	-v $HOME/.vimrc:/root/.vimrc \
 	-v $HOME/.vim:/root/.vim \
 	rooter
-	#-u root \
